@@ -52,7 +52,6 @@ def wrangle_logs():
         #Changes to datetime type
         df['datetime'] = pd.to_datetime(df['datetime'], infer_datetime_format=True)
         df['date'] = pd.to_datetime(df['date'], infer_datetime_format=True)
-
         #Sets index
         df = df.set_index('date')
 
@@ -79,7 +78,7 @@ def wrangle_logs():
         
         #Finds addresses for IP if available
         df = resolve_ip_addy(df)
-        
+        df = df.drop(columns='id')
         #Caching
         df.to_csv(filename, index=False)
         #Sets index
